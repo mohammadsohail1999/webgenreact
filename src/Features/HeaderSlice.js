@@ -39,11 +39,22 @@ const HeaderSlice = createSlice({
         el.id === action.payload.id ? action.payload : el
       );
     },
+
+    deleteLink: (state, action) => {
+      state.data.links = state.data.links.filter(
+        (el) => el.id !== action.payload
+      );
+    },
   },
 });
 
-export const { changeData, addmoreLinks, updateLinks, createInitialLink } =
-  HeaderSlice.actions;
+export const {
+  changeData,
+  addmoreLinks,
+  updateLinks,
+  createInitialLink,
+  deleteLink,
+} = HeaderSlice.actions;
 
 export default HeaderSlice.reducer;
 

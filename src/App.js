@@ -1,17 +1,20 @@
-//import logo from './logo.svg';
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TopAppBar from "./Components/Appbar";
 import HeaderPage from "./Pages/Header/HeaderPage";
-// import Template from "./Template/Template";
+import { useRef } from "react";
+import Preview from "./Pages/Preview/Preview";
 
 function App() {
+  const headerRef = useRef(null);
+
   return (
     <>
       <Router>
         <TopAppBar />
         <Routes>
-          <Route path="/" element={<HeaderPage />} />
+          <Route path="/" element={<HeaderPage headerRef={headerRef} />} />
+          <Route path="/preview" element={<Preview headerRef={headerRef} />} />
         </Routes>
       </Router>
     </>

@@ -3,12 +3,12 @@ import React from "react";
 import Header from "./Header";
 import HeaderForm from "./HeaderForm";
 
-const HeaderPage = () => {
+const HeaderPage = ({ headerRef }) => {
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={12} md={3}>
-          <HeaderForm />
+          <HeaderForm headerRef={headerRef} />
         </Grid>
         <Grid item xs={12} md={9}>
           <Box

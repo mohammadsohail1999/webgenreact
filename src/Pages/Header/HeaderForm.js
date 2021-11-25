@@ -1,21 +1,29 @@
-import { Button, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { Fragment } from "react";
 import { v4 as uuid } from "uuid";
 // import "./Header.modules.csss";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addmoreLinks,
   changeData,
   createInitialLink,
   updateLinks,
+  deleteLink,
 } from "../../Features/HeaderSlice";
+
 import { getHeaderState } from "../../Features/HeaderSlice";
-const HeaderForm = () => {
+const HeaderForm = ({ headerRef }) => {
   const { headerBackground, color, headerTitle, links } =
     useSelector(getHeaderState);
 
   let limit = 4;
+
+  const save = () => {
+    headerRef.current = document.querySelector(".header_wrapper");
+    console.log(headerRef);
+  };
 
   const dispatch = useDispatch();
 
@@ -111,6 +119,14 @@ const HeaderForm = () => {
                     value={el.linkUrl}
                     margin="dense"
                   />
+                  <IconButton
+                    onClick={() => {
+                      dispatch(deleteLink(el.id));
+                    }}
+                    aria-label="delete"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 </Fragment>
               );
             })
@@ -132,15 +148,23 @@ const HeaderForm = () => {
               />
             </>
           )}
-
-          <Button
-            onClick={() => {
-              dispatch(addmoreLinks());
-            }}
-            disabled={!links.length || links.length === limit}
-          >
-            Add More Links
-          </Button>
+          <div>
+            <Button
+              onClick={() => {
+                dispatch(addmoreLinks());
+              }}
+              disabled={!links.length || links.length === limit}
+            >
+              Add More Links
+            </Button>
+            <Button
+              onClick={() => {
+                save();
+              }}
+            >
+              Save
+            </Button>
+          </div>
         </Box>
       </form>
     </Box>
